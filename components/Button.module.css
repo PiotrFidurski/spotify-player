@@ -1,0 +1,14 @@
+.default {
+  color: var(--text-button);
+  outline: none;
+  border: 1px solid var(--borderColor-button);
+  border-radius: 9999px;
+  padding: 10px;
+  background-color: rgb(30, 215, 97);
+  transition: background-color 0.1s ease-in;
+}
+
+.default:hover {
+  cursor: pointer;
+  background-color: rgb(27, 193, 87);
+}
