@@ -1,13 +1,20 @@
+import { Main } from "@components/Main";
+import { Sidebar } from "@components/Sidebar";
+import styles from "@styles/home.module.css";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/client";
-import { useTheme } from "../features/hooks/useTheme";
+import * as React from "react";
 
 const Home: NextPage = () => {
-  const [session, loading] = useSession();
+  const [activeSong, setActiveSong] = React.useState(null);
 
-  const { toggleTheme } = useTheme();
-
-  return <div onClick={toggleTheme}>click me</div>;
+  const [session] = useSession();
+  return (
+    <div className={styles.container}>
+      <Sidebar setActiveSong={setActiveSong} />
+      <Main activeSong={activeSong} />
+    </div>
+  );
 };
 
 export default Home;

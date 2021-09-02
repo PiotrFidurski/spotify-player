@@ -4,3 +4,39 @@
   margin: 0 auto;
   align-items: center;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid var(--borderColor-button);
+  border-left: 4px solid var(--bg-button);
+  border-radius: 9999px;
+  animation: spin 0.7s linear infinite;
+}
+
+.centerSpinner {
+  height: 50px;
+  min-height: 50px;
+  align-items: center;
+  margin: 0px auto;
+  display: flex;
+}
+
+.centerSpinner:hover {
+  cursor: pointer;
+}
+
+.wrapElipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

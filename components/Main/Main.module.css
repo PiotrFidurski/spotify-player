@@ -1,0 +1,28 @@
+.container {
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.songDetails {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.playerContainer {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.playerContainer > svg {
+  fill: "var(--text-primary)";
+}

@@ -1,7 +1,7 @@
+import { Button } from "@components/Button";
+import styles from "@styles/login.module.css";
 import type { GetServerSideProps } from "next";
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/client";
-import { Button } from "../components/Button";
-import styles from "../styles/login.module.css";
 
 interface Props {
   providers: Record<string, ClientSafeProvider>;

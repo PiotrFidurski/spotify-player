@@ -1,0 +1,13 @@
+.container {
+  padding: 10px;
+  display: flex;
+  background: var(--bg-primary);
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+}

@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.container > div {
+  border-radius: inherit;
+}
+
+.container::after {
+  content: "";
+  width: inherit;
+  height: inherit;
+  border: 1px solid var(--shadow-color);
+  border-radius: inherit;
+  box-sizing: border-box;
+  position: absolute;
+}

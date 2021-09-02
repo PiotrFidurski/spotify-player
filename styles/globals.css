@@ -17,13 +17,60 @@ a {
 }
 
 body[data-theme="light"] {
+  --bg-input: rgb(237 238 239);
+  --bg-button: rgb(30, 215, 97);
+  --text-primary: black;
+  --text-secondary: rgb(69, 90, 100);
   --text-button: rgb(255, 255, 255);
   --borderColor-button: rgba(0 0 0 / 10%);
   --bg-primary: rgb(255, 255, 255);
+  --sidebar-bg: rgb(250, 250, 250);
+  --shadow-color: rgba(255, 255, 255, 10%);
+  --input-bg: rgb(17, 19, 20);
 }
 
 body[data-theme="dark"] {
+  --bg-input: rgb(17, 19, 20);
+  --bg-button: rgb(30, 215, 97);
+  --text-primary: white;
+  --text-secondary: rgb(69, 90, 100);
   --text-button: rgb(255, 255, 255);
   --borderColor-button: rgb(255 255 255 / 30%);
   --bg-primary: rgb(20, 21, 21);
+  --sidebar-bg: rgb(25, 29, 32);
+  --shadow-color: rgba(255, 255, 255, 10%);
+  --input-bg: rgb(17, 19, 20);
+}
+
+*::-webkit-scrollbar {
+  width: 0.4em;
+  border-radius: 3px;
+}
+*::-webkit-scrollbar-track {
+  --webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 9999px;
+}
+._ContentRSWP {
+  flex-direction: row !important;
+}
+._InfoRSWP {
+  border: 0 !important;
+}
+
+@media screen and (max-width: 700px) {
+  ._InfoRSWP {
+    max-width: 200px !important;
+  }
+  .__3ct7b8 {
+    width: 115px !important;
+  }
+  ._ContentRSWP {
+    justify-content: flex-start !important;
+  }
+  ._ContentRSWP > * {
+    width: auto !important;
+  }
 }

@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  transition: background 0.2s ease-in;
+}
+
+.inputContainer {
+  background: var(--bg-input);
+  box-shadow: 0 0 5px 1px var(--shadow-color);
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px auto;
+  width: 90%;
+  border-radius: 9999px;
+  align-items: center;
+  position: sticky;
+  top: 10px;
+  z-index: 1;
+}
+
+.loupeContainer {
+  display: flex;
+  margin-left: 10px;
+  height: 100%;
+  align-items: center;
+  width: 30px;
+}
+
+.searchInput {
+  width: 100%;
+  caret-color: var(--text-primary);
+  color: var(--text-primary);
+  height: 40px;
+  padding: 5px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+}
+
+.searchInput::placeholder {
+  color: rgb(73, 75, 77);
+}
