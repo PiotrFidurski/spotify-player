@@ -7,6 +7,8 @@ export const useTheme = () => {
     () => theme ?? "light"
   );
 
+  const isDarkMode = currentTheme === "dark";
+
   const oppositeTheme = currentTheme === "light" ? "dark" : "light";
 
   const toggleTheme = () => {
@@ -26,5 +28,5 @@ export const useTheme = () => {
     localStorage.setItem("theme", JSON.stringify(currentTheme));
   }, [currentTheme]);
 
-  return { toggleTheme };
+  return { toggleTheme, isDarkMode };
 };

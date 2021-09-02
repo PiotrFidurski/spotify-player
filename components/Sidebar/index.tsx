@@ -1,7 +1,6 @@
 import { api } from "@api";
 import { ImageComponent } from "@components/ImageComponent";
 import { Search } from "@components/Search";
-import { useTheme } from "@hooks/useTheme";
 import gStyles from "@styles/_app.module.css";
 import { Plus } from "@svg";
 import { useSession } from "next-auth/client";
@@ -14,8 +13,6 @@ interface Props {
 }
 
 export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
-  const { toggleTheme } = useTheme();
-
   const [hasScrolled, setHasScrolled] = React.useState(0);
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -34,7 +31,7 @@ export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
       element?.current!.removeEventListener("scroll", () => callback());
   }, []);
 
-  const { data, fetchNextPage, isFetching, isLoading, hasNextPage } =
+  const { data, fetchNextPage, isFetching, isLoading, hasNextPage, isError } =
     useInfiniteQuery(
       ["spotifyTracks", query],
       ({ pageParam }) =>
@@ -58,7 +55,7 @@ export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
       <div className={styles.container} ref={containerRef}>
         {!isLoading
           ? data?.pages?.map((page) =>
-              page.tracks.items.map((track: any) => (
+              page?.tracks?.items?.map((track: any) => (
                 <div
                   className={styles.trackContainer}
                   key={track.id}

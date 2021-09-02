@@ -1,13 +1,5 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
-  env: {
-    SPOTIFY_API_URI: "https://api.spotify.com/v1",
-    SPOTIFY_API_TOKEN: "https://accounts.spotify.com/api/token",
-  },
-  images: {
-    domains: ["i.scdn.co", "res.cloudinary.com"],
-  },
   async redirects() {
     return [
       {
@@ -25,5 +17,13 @@ module.exports = {
         permanent: true,
       },
     ];
+  },
+  reactStrictMode: true,
+  env: {
+    SPOTIFY_API_URI: "https://api.spotify.com/v1",
+    SPOTIFY_API_TOKEN: "https://accounts.spotify.com/api/token",
+  },
+  images: {
+    domains: ["i.scdn.co", "res.cloudinary.com"],
   },
 };
