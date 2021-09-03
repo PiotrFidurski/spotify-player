@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Spotify-Player
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<details>
+<summary>Click to expand</summary>
+  
+- [Introduction](#introduction)  
+  
+- [Environment Variables](#environment-variables)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</details>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Introduction
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Welcome to [Spotify-player](https://spotify-player-opal.vercel.app) where u can search for any song and play it through spotify API (requires premium account).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<table>
+  <tr>
+    <td align="left">
+<img src="https://i.imgur.com/o5Erg6p.png" align="center" /></td>
+   
+  </tr>
+</table>
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+| Name                | Description                                                                    | Example                                                     |
+| ------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| SPOTIFY_API_URI      | spotify API uri                                                           | `https://api.spotify.com/v1`     |
+| SPOTIFY_API_TOKEN   | spotify API uri to receive refresh_token |`https://accounts.spotify.com/api/token`
+| NEXTAUTH_SECRET     | some secret key for your next-auth setup | `192334184120` |
+| NEXTAUTH_URL        | The URI of the app                                                             | `https://spotify-player-opal.vercel.app/`                           |
+|SPOTIFY_CLIENT_ID | spotify client id [dashboard](https://developer.spotify.com/dashboard/applications) | `e3asd3e790v3aas4199aasd057abbe0a82006`|
+|SPOTIFY_CLIENT_SECRET | spotify client secret [dashboard](https://developer.spotify.com/dashboard/applications) | `e3asd3e790v3aas4199aasd057abbe0a82006`|
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy this yourself
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Clone to your computer.
 
-## Deploy on Vercel
+  - `clone this repo`
+  
+  - `cd spotify-player`
+  
+  - `npm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Create .env.local in the root directory of your project, add env variables required.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Start a dev server
+
+  - `npm run dev`
