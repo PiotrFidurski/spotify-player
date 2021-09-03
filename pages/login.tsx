@@ -28,6 +28,7 @@ const Provider: React.FC<{ provider: ClientSafeProvider }> = ({ provider }) => (
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const providers = await getProviders();
+
   return { props: { providers } };
 };
 
