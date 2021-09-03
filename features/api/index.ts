@@ -36,18 +36,5 @@ export const api = {
         }
       );
     },
-    searchArtists: ({
-      query,
-      accessToken,
-    }: {
-      query: string;
-      accessToken: string;
-    }) => {
-      return getData(`search?q=${query}&type=artist`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-    },
   },
 };

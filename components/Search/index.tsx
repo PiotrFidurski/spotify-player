@@ -1,23 +1,13 @@
 import { Loupe } from "@svg";
+import debounce from "features/utils/debounce";
 import * as React from "react";
 import styles from "./Search.module.css";
 
-function debounce(fn: (...args: any) => void, delay: number) {
-  let timeOutId: any = undefined;
-  return (...args: any) => {
-    if (timeOutId) clearTimeout(timeOutId);
-    timeOutId = setTimeout(() => {
-      fn(...args);
-    }, delay);
-  };
-}
-
 interface Props {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-  hasScrolled: number;
 }
 
-export const Search: React.FC<Props> = ({ setQuery, hasScrolled }) => {
+export const Search: React.FC<Props> = ({ setQuery }) => {
   const [focused, setFocused] = React.useState(false);
 
   const handleKeyUp = debounce((e: React.BaseSyntheticEvent) => {
@@ -25,12 +15,7 @@ export const Search: React.FC<Props> = ({ setQuery, hasScrolled }) => {
   }, 350);
 
   return (
-    <div
-      className={styles.container}
-      style={{
-        background: hasScrolled > 200 ? "var(--shadow-color)" : "transparent",
-      }}
-    >
+    <div className={styles.container}>
       <div
         className={styles.inputContainer}
         style={

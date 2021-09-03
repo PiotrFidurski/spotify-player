@@ -1,6 +1,9 @@
 import { api } from "@api";
 import { ImageComponent } from "@components/ImageComponent";
 import { Search } from "@components/Search";
+import { actionTypes } from "@components/TrackProvider/actions";
+import { Track } from "@components/TrackProvider/context";
+import { useTrack } from "@components/TrackProvider/useTrack";
 import gStyles from "@styles/_app.module.css";
 import { Plus } from "@svg";
 import { useSession } from "next-auth/client";
@@ -8,12 +11,25 @@ import * as React from "react";
 import { useInfiniteQuery } from "react-query";
 import styles from "./Sidebar.module.css";
 
-interface Props {
-  setActiveSong: React.Dispatch<React.SetStateAction<null>>;
+interface SpotifyTracks {
+  href: string;
+  items: Array<Track>;
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string | null;
+  total: number;
 }
 
-export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
-  const [hasScrolled, setHasScrolled] = React.useState(0);
+interface PaginatedResults {
+  tracks: SpotifyTracks;
+}
+
+export const Sidebar: React.FC = () => {
+  const {
+    dispatch,
+    state: { currentTrack, tracks },
+  } = useTrack();
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -21,45 +37,57 @@ export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
 
   const [query, setQuery] = React.useState("");
 
-  React.useEffect(() => {
-    const element = containerRef;
-    const callback = () => {
-      setHasScrolled(element.current?.scrollTop!);
-    };
-    element?.current!.addEventListener("scroll", () => callback());
-    return () =>
-      element?.current!.removeEventListener("scroll", () => callback());
-  }, []);
-
-  const { data, fetchNextPage, isFetching, isLoading, hasNextPage, isError } =
-    useInfiniteQuery(
+  const { data, fetchNextPage, isFetching, isLoading, hasNextPage } =
+    useInfiniteQuery<PaginatedResults, SpotifyTracks>(
       ["spotifyTracks", query],
       ({ pageParam }) =>
         api.spotify.searchTracks({
           query,
-          accessToken: (session?.user as any)?.accessToken!,
+          accessToken: session?.user?.accessToken!,
           offset: pageParam,
           limit: 35,
         }),
       {
         enabled: Boolean(query),
+        refetchOnReconnect: false,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
         getNextPageParam: (lastPage) => {
-          return lastPage?.tracks?.offset + 20;
+          return lastPage?.tracks?.offset + 35;
         },
       }
     );
 
+  React.useEffect(() => {
+    const songs = data?.pages.map((page) =>
+      page?.tracks?.items?.map((track) => track)
+    );
+
+    dispatch({ type: actionTypes.setTracks, payload: songs });
+  }, [data, isLoading, dispatch]);
+
+  const setOffset = (trackId: string) => {
+    const index = tracks.flat().findIndex((element) => element.id === trackId);
+
+    dispatch({ type: actionTypes.setOffset, payload: index });
+  };
+
   return (
     <div className={styles.container}>
-      <Search setQuery={setQuery} hasScrolled={hasScrolled} />
+      <Search setQuery={setQuery} />
       <div className={styles.container} ref={containerRef}>
         {!isLoading
           ? data?.pages?.map((page) =>
-              page?.tracks?.items?.map((track: any) => (
+              page?.tracks?.items?.map((track) => (
                 <div
+                  style={
+                    currentTrack?.id === track.id
+                      ? { background: "var(--shadow-color)" }
+                      : { background: "transparent" }
+                  }
+                  onClick={() => setOffset(track.id)}
                   className={styles.trackContainer}
                   key={track.id}
-                  onClick={() => setActiveSong(track)}
                 >
                   <ImageComponent
                     style={{
@@ -69,7 +97,6 @@ export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
                     }}
                     src={track.album.images[2].url}
                   />
-
                   <div className={styles.trackDetails}>
                     <span
                       className={gStyles.wrapElipsis}
@@ -89,6 +116,19 @@ export const Sidebar: React.FC<Props> = ({ setActiveSong }) => {
                       </span>
                     </div>
                   </div>
+                  {/* <div
+                    className={styles.addToPlaylistContainer}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      dispatch({ type: actionTypes.setTracks, payload: track });
+                    }}
+                  >
+                    <Plus
+                      width="30px"
+                      height="30px"
+                      fill="var(--text-primary)"
+                    />
+                  </div> */}
                 </div>
               ))
             )

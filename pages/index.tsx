@@ -1,18 +1,29 @@
 import { Main } from "@components/Main";
 import { Sidebar } from "@components/Sidebar";
+import { TrackProvider } from "@components/TrackProvider/Provider";
 import styles from "@styles/home.module.css";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/client";
+import { useRouter } from "next/dist/client/router";
 import * as React from "react";
 
 const Home: NextPage = () => {
-  const [activeSong, setActiveSong] = React.useState(null);
+  const [session, loading] = useSession();
 
-  const [session] = useSession();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!loading && !session) router.push("/login");
+  }, [router, session, loading]);
+
+  if (!session) return null;
+
   return (
     <div className={styles.container}>
-      <Sidebar setActiveSong={setActiveSong} />
-      <Main activeSong={activeSong} />
+      <TrackProvider>
+        <Sidebar />
+        <Main />
+      </TrackProvider>
     </div>
   );
 };

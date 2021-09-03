@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions, TokenSet } from "next-auth";
+import NextAuth, { NextAuthOptions, OwnUser, TokenSet } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Providers, { Provider } from "next-auth/providers";
 
@@ -65,7 +65,7 @@ const options: NextAuthOptions = {
 
       return refreshAccessToken(token);
     },
-    async session(session, user) {
+    async session(session, user: OwnUser) {
       session.user = user;
 
       return session;

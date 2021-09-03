@@ -46,9 +46,21 @@
   display: flex;
   min-width: 0px;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .trackArtists {
   min-width: 0px;
   display: flex;
+}
+
+.addToPlaylistContainer {
+  display: flex;
+  margin-left: 30px;
+  flex-grow: 1;
+  max-width: 31px;
+}
+
+.addToPlaylistContainer:hover > svg {
+  fill: var(--bg-button);
 }
