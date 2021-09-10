@@ -62,11 +62,11 @@ export const Sidebar: React.FC = () => {
     );
 
   React.useEffect(() => {
-    const songs = data?.pages.map((page) =>
+    const tracks = data?.pages?.map((page) =>
       page?.tracks?.items?.map((track) => track)
     );
 
-    dispatch({ type: actionTypes.setTracks, payload: songs });
+    dispatch({ type: actionTypes.setTracks, payload: tracks });
   }, [data, isLoading, dispatch]);
 
   const setOffset = (trackId: string) => {
