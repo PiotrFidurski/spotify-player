@@ -42,13 +42,14 @@ export const Sidebar: React.FC = () => {
   const { data, fetchNextPage, isFetching, isLoading, hasNextPage } =
     useInfiniteQuery<PaginatedResults, SpotifyTracks>(
       ["spotifyTracks", query],
-      ({ pageParam }) =>
-        api.spotify.searchTracks({
+      ({ pageParam: offset }) => {
+        return api.spotify.searchTracks({
           query,
           accessToken: session?.user?.accessToken!,
-          offset: pageParam,
+          offset,
           limit: PAGINATION_LIMIT,
-        }),
+        });
+      },
       {
         enabled: Boolean(query),
         refetchOnReconnect: false,
