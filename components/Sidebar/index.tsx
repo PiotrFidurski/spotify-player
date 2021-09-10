@@ -42,14 +42,13 @@ export const Sidebar: React.FC = () => {
   const { data, fetchNextPage, isFetching, isLoading, hasNextPage } =
     useInfiniteQuery<PaginatedResults, SpotifyTracks>(
       ["spotifyTracks", query],
-      ({ pageParam: offset }) => {
-        return api.spotify.searchTracks({
+      ({ pageParam: offset }) =>
+        api.spotify.searchTracks({
           query,
           accessToken: session?.user?.accessToken!,
           offset,
           limit: PAGINATION_LIMIT,
-        });
-      },
+        }),
       {
         enabled: Boolean(query),
         refetchOnReconnect: false,
@@ -70,7 +69,7 @@ export const Sidebar: React.FC = () => {
   }, [data, isLoading, dispatch]);
 
   const setOffset = (trackId: string) => {
-    const index = tracks.flat().findIndex((element) => element.id === trackId);
+    const index = tracks.flat().findIndex((track) => track.id === trackId);
 
     dispatch({ type: actionTypes.setOffset, payload: index });
   };
@@ -119,19 +118,6 @@ export const Sidebar: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  {/* <div
-                    className={styles.addToPlaylistContainer}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      dispatch({ type: actionTypes.setTracks, payload: track });
-                    }}
-                  >
-                    <Plus
-                      width="30px"
-                      height="30px"
-                      fill="var(--text-primary)"
-                    />
-                  </div> */}
                 </div>
               ))
             )
