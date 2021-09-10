@@ -10,3 +10,10 @@ export const getCurrentTrackImageUrl = (
 
   return image.album.images[1].url;
 };
+
+const SIXTY_SECONDS = 60000;
+
+export const addMinutesToCurrentTime = (minutes: number) => {
+  const currentTime = new Date().getTime();
+  return new Date(currentTime + minutes * SIXTY_SECONDS).getTime();
+};
