@@ -11,6 +11,8 @@ import * as React from "react";
 import { useInfiniteQuery } from "react-query";
 import styles from "./Sidebar.module.css";
 
+const PAGINATION_LIMIT = 35;
+
 interface SpotifyTracks {
   href: string;
   items: Array<Track>;
@@ -45,7 +47,7 @@ export const Sidebar: React.FC = () => {
           query,
           accessToken: session?.user?.accessToken!,
           offset: pageParam,
-          limit: 35,
+          limit: PAGINATION_LIMIT,
         }),
       {
         enabled: Boolean(query),
@@ -53,7 +55,7 @@ export const Sidebar: React.FC = () => {
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         getNextPageParam: (lastPage) => {
-          return lastPage?.tracks?.offset + 35;
+          return lastPage?.tracks?.offset + PAGINATION_LIMIT;
         },
       }
     );

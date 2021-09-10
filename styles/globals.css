@@ -53,9 +53,11 @@ body[data-theme="dark"] {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 9999px;
 }
+
 ._ContentRSWP {
   flex-direction: row !important;
 }
+
 ._InfoRSWP {
   border: 0 !important;
 }
