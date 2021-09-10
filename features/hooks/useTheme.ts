@@ -17,6 +17,7 @@ export const useTheme = () => {
 
   React.useEffect(() => {
     const storedTheme = localStorage.getItem("theme")!;
+
     if (storedTheme) {
       theme = JSON.parse(storedTheme!);
       setCurrentTheme(theme!);

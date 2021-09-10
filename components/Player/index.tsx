@@ -53,5 +53,3 @@ export const Player: React.FC = () => {
     </div>
   );
 };
-
-Player.displayName = "Player";

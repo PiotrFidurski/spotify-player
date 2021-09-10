@@ -13,6 +13,7 @@ declare module "next-auth" {
     refreshToken: string;
     sub: string;
   }
+
   interface Session {
     user: OwnUser;
   }

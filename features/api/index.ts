@@ -1,4 +1,4 @@
-export const fetchData = async (url: string, config: RequestInit) => {
+const fetchData = async (url: string, config: RequestInit) => {
   const response = await fetch(`${process.env.SPOTIFY_API_URI}/${url}`, {
     method: "GET",
     headers: {
