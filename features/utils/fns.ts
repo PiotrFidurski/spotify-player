@@ -1,6 +1,6 @@
 import { Track } from "@components/TrackProvider/context";
 
-export const getCurrentTrackImage = (
+export const getCurrentTrackImageUrl = (
   tracks: Array<Track[]>,
   currentlyPlayingId: string
 ) => {
@@ -9,4 +9,11 @@ export const getCurrentTrackImage = (
     .filter((track) => track.id === currentlyPlayingId);
 
   return image.album.images[1].url;
+};
+
+const SIXTY_SECONDS = 60000;
+
+export const addMinutesToCurrentTime = (minutes: number) => {
+  const currentTime = new Date().getTime();
+  return new Date(currentTime + minutes * SIXTY_SECONDS).getTime();
 };

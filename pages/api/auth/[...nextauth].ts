@@ -1,3 +1,4 @@
+import { addMinutesToCurrentTime } from "features/utils/fns";
 import NextAuth, { NextAuthOptions, OwnUser, TokenSet } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Providers, { Provider } from "next-auth/providers";
@@ -23,7 +24,7 @@ async function refreshAccessToken(token: JWT) {
     return {
       ...token,
       accessToken: refreshedToken.access_token,
-      accessTokenExpires: Date.now() + refreshedToken.expires_in! * 1000,
+      accessTokenExpiresAt: Date.now() + refreshedToken.expires_in! * 1000,
       refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
@@ -51,19 +52,18 @@ const options: NextAuthOptions = {
     async jwt(token, _, account) {
       if (account) {
         token.id = account.id;
-        token.accessTokenExpires = Date.now() + account!.expires_in! * 1000;
+        token.accessTokenExpiresAt = Date.now() + account!.expires_in! * 1000;
         token.accessToken = account.accessToken;
         token.refreshToken = account.refreshToken;
       }
 
-      if (
-        new Date(new Date().getTime() + 5 * 60000).getTime() <
-        (token.accessTokenExpires as any)
-      ) {
+      const currentTimePlusTenMin = addMinutesToCurrentTime(10);
+
+      if (currentTimePlusTenMin < (token.accessTokenExpiresAt as any)) {
         return token;
       }
 
-      return refreshAccessToken(token);
+      return await refreshAccessToken(token);
     },
     async session(session, user: OwnUser) {
       session.user = user;

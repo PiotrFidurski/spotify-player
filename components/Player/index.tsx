@@ -1,10 +1,21 @@
 import { actionTypes } from "@components/TrackProvider/actions";
 import { useTrack } from "@components/TrackProvider/useTrack";
-import { getCurrentTrackImage } from "features/utils/fns";
+import { getCurrentTrackImageUrl } from "features/utils/fns";
 import { useSession } from "next-auth/client";
 import * as React from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import styles from "./Player.module.css";
+
+const playerStyles = {
+  sliderTrackColor: "var(--bg-input)",
+  sliderHandleColor: "var(--bg-button)",
+  sliderColor: "var(--bg-button)",
+  color: "var(--text-primary)",
+  trackArtistColor: "var(--text-primary)",
+  bgColor: "var(--sidebar-bg)",
+  activeColor: "white",
+  trackNameColor: "var(--text-primary)",
+};
 
 export const Player: React.FC = () => {
   const [session] = useSession();
@@ -23,27 +34,18 @@ export const Player: React.FC = () => {
           autoPlay={true}
           callback={({ isPlaying, isActive, track }) => {
             if (isPlaying && isActive) {
-              const image = getCurrentTrackImage(tracks, track.id);
+              const imageUrl = getCurrentTrackImageUrl(tracks, track.id);
               dispatch({
                 type: actionTypes.currentTrack,
                 payload: {
                   ...track,
-                  image,
+                  image: imageUrl,
                 },
               });
             }
           }}
           magnifySliderOnHover={true}
-          styles={{
-            sliderTrackColor: "var(--bg-input)",
-            sliderHandleColor: "var(--bg-button)",
-            sliderColor: "var(--bg-button)",
-            color: "var(--text-primary)",
-            trackArtistColor: "var(--text-primary)",
-            bgColor: "var(--sidebar-bg)",
-            activeColor: "white",
-            trackNameColor: "var(--text-primary)",
-          }}
+          styles={playerStyles}
           uris={tracks.flat().map((track) => track.uri)}
           token={session?.user?.accessToken}
         />
@@ -51,5 +53,3 @@ export const Player: React.FC = () => {
     </div>
   );
 };
-
-Player.displayName = "Player";

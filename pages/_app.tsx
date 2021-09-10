@@ -9,7 +9,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
 
-  const {} = useTheme();
+  useTheme();
 
   return (
     <QueryClientProvider client={queryClient}>

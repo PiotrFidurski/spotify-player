@@ -1,4 +1,3 @@
-import { Button } from "@components/Button";
 import styles from "@styles/login.module.css";
 import type { GetServerSideProps } from "next";
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/client";
@@ -17,12 +16,13 @@ const LoginPage: React.FC<Props> = ({ providers }) => (
 
 const Provider: React.FC<{ provider: ClientSafeProvider }> = ({ provider }) => (
   <div>
-    <Button
+    <button
+      className={styles.button}
       style={{ fontWeight: 900 }}
       onClick={() => signIn(provider.id, { callbackUrl: "/" })}
     >
       Continue with {provider.name}
-    </Button>
+    </button>
   </div>
 );
 

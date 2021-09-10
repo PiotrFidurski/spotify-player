@@ -5,3 +5,18 @@
   align-items: center;
   height: 100vh;
 }
+
+.button {
+  color: var(--text-button);
+  outline: none;
+  border: 1px solid var(--borderColor-button);
+  border-radius: 9999px;
+  padding: 10px;
+  background-color: var(--bg-button);
+  transition: background-color 0.1s ease-in;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: var(--bg-button);
+}

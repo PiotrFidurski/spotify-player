@@ -11,6 +11,8 @@ import * as React from "react";
 import { useInfiniteQuery } from "react-query";
 import styles from "./Sidebar.module.css";
 
+const PAGINATION_LIMIT = 35;
+
 interface SpotifyTracks {
   href: string;
   items: Array<Track>;
@@ -25,13 +27,11 @@ interface PaginatedResults {
   tracks: SpotifyTracks;
 }
 
-export const Sidebar: React.FC = () => {
+export const Sidebar = () => {
   const {
     dispatch,
     state: { currentTrack, tracks },
   } = useTrack();
-
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const [session] = useSession();
 
@@ -40,12 +40,12 @@ export const Sidebar: React.FC = () => {
   const { data, fetchNextPage, isFetching, isLoading, hasNextPage } =
     useInfiniteQuery<PaginatedResults, SpotifyTracks>(
       ["spotifyTracks", query],
-      ({ pageParam }) =>
+      ({ pageParam: offset }) =>
         api.spotify.searchTracks({
           query,
           accessToken: session?.user?.accessToken!,
-          offset: pageParam,
-          limit: 35,
+          offset,
+          limit: PAGINATION_LIMIT,
         }),
       {
         enabled: Boolean(query),
@@ -53,21 +53,21 @@ export const Sidebar: React.FC = () => {
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         getNextPageParam: (lastPage) => {
-          return lastPage?.tracks?.offset + 35;
+          return lastPage?.tracks?.offset + PAGINATION_LIMIT;
         },
       }
     );
 
   React.useEffect(() => {
-    const songs = data?.pages.map((page) =>
+    const tracks = data?.pages?.map((page) =>
       page?.tracks?.items?.map((track) => track)
     );
 
-    dispatch({ type: actionTypes.setTracks, payload: songs });
+    dispatch({ type: actionTypes.setTracks, payload: tracks });
   }, [data, isLoading, dispatch]);
 
   const setOffset = (trackId: string) => {
-    const index = tracks.flat().findIndex((element) => element.id === trackId);
+    const index = tracks.flat().findIndex((track) => track.id === trackId);
 
     dispatch({ type: actionTypes.setOffset, payload: index });
   };
@@ -75,7 +75,7 @@ export const Sidebar: React.FC = () => {
   return (
     <div className={styles.container}>
       <Search setQuery={setQuery} />
-      <div className={styles.container} ref={containerRef}>
+      <div className={styles.container}>
         {!isLoading
           ? data?.pages?.map((page) =>
               page?.tracks?.items?.map((track) => (
@@ -116,19 +116,6 @@ export const Sidebar: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  {/* <div
-                    className={styles.addToPlaylistContainer}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      dispatch({ type: actionTypes.setTracks, payload: track });
-                    }}
-                  >
-                    <Plus
-                      width="30px"
-                      height="30px"
-                      fill="var(--text-primary)"
-                    />
-                  </div> */}
                 </div>
               ))
             )

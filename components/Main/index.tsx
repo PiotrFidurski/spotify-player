@@ -7,6 +7,9 @@ import * as React from "react";
 import DarkModeToggle from "react-dark-mode-toggle";
 import styles from "./Main.module.css";
 
+const DEFAULT_AVATAR =
+  "https://res.cloudinary.com/chimson/image/upload/v1596460624/new-client/placeholder.png";
+
 export const Main: React.FC = () => {
   const [session] = useSession();
 
@@ -23,10 +26,7 @@ export const Main: React.FC = () => {
             borderRadius: "9999px",
             marginLeft: "10px",
           }}
-          src={
-            session?.user?.picture ??
-            "https://res.cloudinary.com/chimson/image/upload/v1596460624/new-client/placeholder.png"
-          }
+          src={session?.user?.picture ?? DEFAULT_AVATAR}
         />
       </div>
       <NowPlaying />

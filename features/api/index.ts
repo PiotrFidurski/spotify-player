@@ -1,4 +1,4 @@
-const getData = async (url: string, config: RequestInit) => {
+const fetchData = async (url: string, config: RequestInit) => {
   const response = await fetch(`${process.env.SPOTIFY_API_URI}/${url}`, {
     method: "GET",
     headers: {
@@ -25,7 +25,7 @@ export const api = {
       limit?: number;
       offset?: number;
     }) => {
-      return getData(
+      return fetchData(
         `search?q=${query}&type=track${limit ? `&limit=${limit}` : ""}${
           offset ? `&offset=${offset}` : ""
         }`,
