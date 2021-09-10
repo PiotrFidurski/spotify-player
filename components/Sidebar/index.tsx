@@ -27,13 +27,11 @@ interface PaginatedResults {
   tracks: SpotifyTracks;
 }
 
-export const Sidebar: React.FC = () => {
+export const Sidebar = () => {
   const {
     dispatch,
     state: { currentTrack, tracks },
   } = useTrack();
-
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const [session] = useSession();
 
@@ -77,7 +75,7 @@ export const Sidebar: React.FC = () => {
   return (
     <div className={styles.container}>
       <Search setQuery={setQuery} />
-      <div className={styles.container} ref={containerRef}>
+      <div className={styles.container}>
         {!isLoading
           ? data?.pages?.map((page) =>
               page?.tracks?.items?.map((track) => (
