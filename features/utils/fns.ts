@@ -1,6 +1,6 @@
 import { Track } from "@components/TrackProvider/context";
 
-export const getCurrentTrackImage = (
+export const getCurrentTrackImageUrl = (
   tracks: Array<Track[]>,
   currentlyPlayingId: string
 ) => {

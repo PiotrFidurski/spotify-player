@@ -1,3 +1,4 @@
+import { fetchData } from "@api";
 import NextAuth, { NextAuthOptions, OwnUser, TokenSet } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Providers, { Provider } from "next-auth/providers";
@@ -8,7 +9,7 @@ async function refreshAccessToken(token: JWT) {
       process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET
     ).toString("base64");
 
-    const response = await fetch(process.env.SPOTIFY_API_TOKEN!, {
+    const response = await fetchData(process.env.SPOTIFY_API_TOKEN!, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -63,7 +64,7 @@ const options: NextAuthOptions = {
         return token;
       }
 
-      return refreshAccessToken(token);
+      return await refreshAccessToken(token);
     },
     async session(session, user: OwnUser) {
       session.user = user;
