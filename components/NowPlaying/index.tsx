@@ -4,6 +4,9 @@ import gStyles from "@styles/_app.module.css";
 import * as React from "react";
 import styles from "./NowPlaying.module.css";
 
+const DEFAULT_TRACK_IMAGE =
+  "https://res.cloudinary.com/chimson/image/upload/v1630675298/grey-gradient-background-300x300.jpg";
+
 export const NowPlaying: React.FC = () => {
   const {
     state: { currentTrack },
@@ -29,10 +32,7 @@ export const NowPlaying: React.FC = () => {
           borderRadius: 0,
           marginTop: "10px",
         }}
-        src={
-          currentTrack?.image! ??
-          "https://res.cloudinary.com/chimson/image/upload/v1630675298/grey-gradient-background-300x300.jpg"
-        }
+        src={currentTrack?.image! ?? DEFAULT_TRACK_IMAGE}
       />
     </div>
   );
