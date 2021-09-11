@@ -20,6 +20,7 @@ export function Main() {
       <div className={styles.avatarContainer}>
         <DarkModeToggle onChange={toggleTheme} checked={isDarkMode} size={50} />
         <ImageComponent
+          alt="Avatar Image"
           style={{
             maxWidth: "30px",
             height: "30px",

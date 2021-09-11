@@ -4,18 +4,13 @@ import styles from "./ImageComponent.module.css";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
+  alt: string;
 }
 
-export function ImageComponent({ style, src }: Props) {
+export function ImageComponent({ style, src, alt }: Props) {
   return (
     <div className={styles.container} style={{ ...style }}>
-      <Image
-        src={src}
-        layout="fill"
-        objectFit="fill"
-        alt="image"
-        quality={100}
-      />
+      <Image src={src} layout="fill" objectFit="fill" quality={100} alt={alt} />
     </div>
   );
 }
