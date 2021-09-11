@@ -10,7 +10,7 @@ import styles from "./Main.module.css";
 const DEFAULT_AVATAR =
   "https://res.cloudinary.com/chimson/image/upload/v1596460624/new-client/placeholder.png";
 
-export const Main: React.FC = () => {
+export function Main() {
   const [session] = useSession();
 
   const { toggleTheme, isDarkMode } = useTheme();
@@ -20,6 +20,7 @@ export const Main: React.FC = () => {
       <div className={styles.avatarContainer}>
         <DarkModeToggle onChange={toggleTheme} checked={isDarkMode} size={50} />
         <ImageComponent
+          alt="Avatar Image"
           style={{
             maxWidth: "30px",
             height: "30px",
@@ -33,4 +34,4 @@ export const Main: React.FC = () => {
       <Player />
     </div>
   );
-};
+}

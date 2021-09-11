@@ -8,7 +8,11 @@ const initialState: State = {
   tracks: [],
 };
 
-export const TrackProvider: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactChild;
+};
+
+export function TrackProvider({ children }: Props) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   return (
@@ -16,4 +20,4 @@ export const TrackProvider: React.FC = ({ children }) => {
       {children}
     </TrackContext.Provider>
   );
-};
+}

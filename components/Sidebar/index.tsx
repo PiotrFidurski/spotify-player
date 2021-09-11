@@ -27,7 +27,7 @@ interface PaginatedResults {
   tracks: SpotifyTracks;
 }
 
-export const Sidebar = () => {
+export function Sidebar() {
   const {
     dispatch,
     state: { currentTrack, tracks },
@@ -90,6 +90,7 @@ export const Sidebar = () => {
                   key={track.id}
                 >
                   <ImageComponent
+                    alt="Artist Album Image"
                     style={{
                       maxWidth: "64px",
                       height: "64px",
@@ -136,4 +137,4 @@ export const Sidebar = () => {
       </div>
     </div>
   );
-};
+}

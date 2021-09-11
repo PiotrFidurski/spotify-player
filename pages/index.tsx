@@ -5,9 +5,10 @@ import styles from "@styles/home.module.css";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
+import Head from "next/head";
 import * as React from "react";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const [session, loading] = useSession();
 
   const router = useRouter();
@@ -20,12 +21,27 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <TrackProvider>
-        <Sidebar />
-        <Main />
-      </TrackProvider>
+      <Head>
+        <title>Play any Spotify song!</title>
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+          key="viewport"
+        />
+        <meta
+          name="description"
+          content="Search for a song and play it!"
+          key="description"
+        />
+        <TrackProvider>
+          <>
+            <Sidebar />
+            <Main />
+          </>
+        </TrackProvider>
+      </Head>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;

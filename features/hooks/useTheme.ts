@@ -2,7 +2,7 @@ import * as React from "react";
 
 let theme: string | undefined = undefined;
 
-export const useTheme = () => {
+export function useTheme() {
   const [currentTheme, setCurrentTheme] = React.useState(
     () => theme ?? "light"
   );
@@ -30,4 +30,4 @@ export const useTheme = () => {
   }, [currentTheme]);
 
   return { toggleTheme, isDarkMode };
-};
+}

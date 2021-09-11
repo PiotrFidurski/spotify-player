@@ -7,7 +7,7 @@ import styles from "./NowPlaying.module.css";
 const DEFAULT_TRACK_IMAGE =
   "https://res.cloudinary.com/chimson/image/upload/v1630675298/grey-gradient-background-300x300.jpg";
 
-export const NowPlaying: React.FC = () => {
+export function NowPlaying() {
   const {
     state: { currentTrack },
   } = useTrack();
@@ -26,6 +26,7 @@ export const NowPlaying: React.FC = () => {
         </span>
       </div>
       <ImageComponent
+        alt="Spotify Track Image"
         style={{
           maxWidth: "300px",
           height: "300px",
@@ -36,4 +37,4 @@ export const NowPlaying: React.FC = () => {
       />
     </div>
   );
-};
+}

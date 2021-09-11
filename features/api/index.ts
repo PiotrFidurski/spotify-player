@@ -1,4 +1,4 @@
-const fetchData = async (url: string, config: RequestInit) => {
+async function fetchData(url: string, config: RequestInit) {
   const response = await fetch(`${process.env.SPOTIFY_API_URI}/${url}`, {
     method: "GET",
     headers: {
@@ -10,7 +10,7 @@ const fetchData = async (url: string, config: RequestInit) => {
   const data = await response.json();
 
   return data;
-};
+}
 
 export const api = {
   spotify: {
