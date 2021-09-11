@@ -1,7 +1,7 @@
 import { Main } from "@components/Main";
 import { Sidebar } from "@components/Sidebar";
 import { TrackProvider } from "@components/TrackProvider/Provider";
-import styles from "@styles/home.module.css";
+import styles from "@styles/HomePage.module.css";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/dist/client/router";
@@ -33,13 +33,13 @@ const HomePage: NextPage = () => {
           content="Search for a song and play it!"
           key="description"
         />
-        <TrackProvider>
-          <>
-            <Sidebar />
-            <Main />
-          </>
-        </TrackProvider>
       </Head>
+      <TrackProvider>
+        <>
+          <Sidebar />
+          <Main />
+        </>
+      </TrackProvider>
     </div>
   );
 };
