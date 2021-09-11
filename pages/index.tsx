@@ -8,7 +8,7 @@ import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 import * as React from "react";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const [session, loading] = useSession();
 
   const router = useRouter();
@@ -35,4 +35,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;
