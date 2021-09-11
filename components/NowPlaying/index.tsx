@@ -26,6 +26,7 @@ export function NowPlaying() {
         </span>
       </div>
       <ImageComponent
+        alt="Spotify Track Image"
         style={{
           maxWidth: "300px",
           height: "300px",

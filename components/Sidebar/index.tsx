@@ -90,6 +90,7 @@ export function Sidebar() {
                   key={track.id}
                 >
                   <ImageComponent
+                    alt="Artist Album Image"
                     style={{
                       maxWidth: "64px",
                       height: "64px",
