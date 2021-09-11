@@ -10,7 +10,13 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 export function ImageComponent({ style, src, alt }: Props) {
   return (
     <div className={styles.container} style={{ ...style }}>
-      <Image src={src} layout="fill" objectFit="fill" alt={alt} />
+      <Image
+        src={src}
+        layout="fill"
+        objectFit="fill"
+        alt={alt}
+        priority={true}
+      />
     </div>
   );
 }
