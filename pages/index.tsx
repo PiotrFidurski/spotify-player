@@ -23,7 +23,16 @@ const HomePage: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <title>Play any Spotify song!</title>
-        <meta name="description" content="Search for a song and play it!" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+          key="viewport"
+        />
+        <meta
+          name="description"
+          content="Search for a song and play it!"
+          key="description"
+        />
         <TrackProvider>
           <>
             <Sidebar />
