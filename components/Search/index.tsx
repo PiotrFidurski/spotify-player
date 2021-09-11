@@ -3,11 +3,11 @@ import debounce from "features/utils/debounce";
 import * as React from "react";
 import styles from "./Search.module.css";
 
-interface Props {
+type Props = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
-export const Search: React.FC<Props> = ({ setQuery }) => {
+export function Search({ setQuery }: Props) {
   const [focused, setFocused] = React.useState(false);
 
   const handleKeyUp = debounce((e: React.BaseSyntheticEvent) => {
@@ -42,4 +42,4 @@ export const Search: React.FC<Props> = ({ setQuery }) => {
       </div>
     </div>
   );
-};
+}

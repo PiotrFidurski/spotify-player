@@ -13,7 +13,7 @@ export const getCurrentTrackImageUrl = (
 
 const SIXTY_SECONDS = 60000;
 
-export const addMinutesToCurrentTime = (minutes: number) => {
+export function addMinutesToCurrentTime(minutes: number) {
   const currentTime = new Date().getTime();
   return new Date(currentTime + minutes * SIXTY_SECONDS).getTime();
-};
+}

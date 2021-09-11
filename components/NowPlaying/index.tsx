@@ -7,7 +7,7 @@ import styles from "./NowPlaying.module.css";
 const DEFAULT_TRACK_IMAGE =
   "https://res.cloudinary.com/chimson/image/upload/v1630675298/grey-gradient-background-300x300.jpg";
 
-export const NowPlaying: React.FC = () => {
+export function NowPlaying() {
   const {
     state: { currentTrack },
   } = useTrack();
@@ -36,4 +36,4 @@ export const NowPlaying: React.FC = () => {
       />
     </div>
   );
-};
+}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TrackContext } from "./context";
 
-export const useTrack = () => {
+export function useTrack() {
   const context = React.useContext(TrackContext);
 
   if (!context)
@@ -9,4 +9,4 @@ export const useTrack = () => {
       "You are using TrackContext outside of TrackProvider, please wrap your parent component in TrackProvider"
     );
   return context;
-};
+}

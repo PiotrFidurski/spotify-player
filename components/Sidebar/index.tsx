@@ -27,7 +27,7 @@ interface PaginatedResults {
   tracks: SpotifyTracks;
 }
 
-export const Sidebar = () => {
+export function Sidebar() {
   const {
     dispatch,
     state: { currentTrack, tracks },
@@ -136,4 +136,4 @@ export const Sidebar = () => {
       </div>
     </div>
   );
-};
+}

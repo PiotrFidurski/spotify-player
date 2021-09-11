@@ -17,7 +17,7 @@ const playerStyles = {
   trackNameColor: "var(--text-primary)",
 };
 
-export const Player: React.FC = () => {
+export function Player() {
   const [session] = useSession();
 
   const {
@@ -52,4 +52,4 @@ export const Player: React.FC = () => {
       ) : null}
     </div>
   );
-};
+}

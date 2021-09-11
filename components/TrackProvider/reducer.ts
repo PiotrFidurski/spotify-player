@@ -1,7 +1,7 @@
 import { Action, actionTypes } from "./actions";
 import { State } from "./context";
 
-export const reducer = (state: State, action: Action) => {
+export function reducer(state: State, action: Action) {
   switch (action.type) {
     case actionTypes.currentTrack: {
       return { ...state, currentTrack: action.payload };
@@ -19,4 +19,4 @@ export const reducer = (state: State, action: Action) => {
       return state;
     }
   }
-};
+}

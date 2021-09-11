@@ -10,7 +10,7 @@ import styles from "./Main.module.css";
 const DEFAULT_AVATAR =
   "https://res.cloudinary.com/chimson/image/upload/v1596460624/new-client/placeholder.png";
 
-export const Main: React.FC = () => {
+export function Main() {
   const [session] = useSession();
 
   const { toggleTheme, isDarkMode } = useTheme();
@@ -33,4 +33,4 @@ export const Main: React.FC = () => {
       <Player />
     </div>
   );
-};
+}
